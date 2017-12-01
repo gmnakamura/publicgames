@@ -15,9 +15,9 @@ function autocorrelation_time(data; size=20)
     # c(t) ~ exp(t/tau)
     value  = 1
     #y      = log(autocorrelation(data)[1:size])
-    y      = log(abs(autocorrelation(data)[1:size]))
+    y      = log.(abs.(autocorrelation(data)[1:size]))
     coeffs = Polynomials.coeffs( Polynomials.polyfit(1:size,y,1))
-    if abs(coeffs[end]) > 0
+    if abs.(coeffs[end]) > 0
         value = -round(Int64,1.0/coeffs[end])
     end
     return value
