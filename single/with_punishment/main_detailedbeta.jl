@@ -77,6 +77,12 @@ beta_max         = args["beta-max"]
 beta_delta       = args["beta-delta"]
 folder           = args["folder"]
 betas = collect(beta_min:beta_delta:beta_max)
+#
+# for p = 1 and c =2/3, a transition appers around beta =2.2
+# next 2 lines improve data aquisition around that point
+#
+beta_delta_2 = beta_delta/5.0
+betas = [ beta_min:beta_delta:2; (2+beta_delta_2):beta_delta_2:2.5; 2.5+beta_delta:beta_delta:beta_max]
 
 f = open("log_performance.dat","a")
 #for c in float([0.0,0.1,0.2,0.5,1.0,2.0,4.0,8.0])
@@ -87,4 +93,5 @@ write_data(path,[betas data tau])
 #end
 
 close(f)
+
 
