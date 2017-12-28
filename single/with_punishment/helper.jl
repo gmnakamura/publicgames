@@ -1,9 +1,9 @@
 #Pkg.add("ArgParse") #uncomment to install
 using ArgParse
 #-----------------------------------------
-function write_data(path, betas, data , error)
+function write_data(path, data)
     # write data and error...
-    writedlm(path,zip(betas,data,error))
+    writedlm(path,data)
     # write gnuplot file
     gnufilename=string(path[1:end-3],"gnu")
     f0,f1 = splitdir(path)
@@ -29,9 +29,9 @@ function parse()
         default = 100
         arg_type = Int
         "--steps","-s"
-        default = 10000
+        default = 1000000
         arg_type = Int
-        help = "number of monte carlo steps. default = 100000"
+        help = "number of monte carlo steps. default =  1000000"
         "-c","--cost"
         default = 0.30
         arg_type = Float64
